@@ -47,12 +47,11 @@ func WyborDzialania() string {
 
 	var wybor string
 	scanner := bufio.NewScanner(os.Stdin)
-	fmt.Printf("Jakie działanie chcesz wykonać? \n Dla dodawania wpisz: dod \n Dla odejmowania wpisz: od \n Dla mnożenia wpisz: mno \n Dla dzielenia wpisz: dz\n\n")
+	fmt.Printf("\nJakie działanie chcesz wykonać? \n\n Dla dodawania wpisz: dod \n Dla odejmowania wpisz: od \n Dla mnożenia wpisz: mno \n Dla dzielenia wpisz: dz\n\n")
 	scanner.Scan()
-	input := scanner.Text()
-	fmt.Printf("Wpisałeś: %q\n\n", input)
+	wybor = scanner.Text()
+	fmt.Printf("\nWpisałeś: %q\n\n", wybor)
 
-	wybor = input
 	return wybor
 
 }
@@ -86,12 +85,64 @@ func Oblicz() int64 {
 
 }
 
-// *** *** HISTORIA WYKONANYCH OBLICZEŃ *** ***
-// pustoooooo
+// *** *** MENU PO UZYSKANIU WYNIKU *** ***
+
+func CoDalej() string {
+
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Printf("\nWybierz, co dalej: \n ZAPIS (z) \n RESET (r) \n ZAKONCZ (k)\n")
+	scanner.Scan()
+	x := scanner.Text()
+	fmt.Printf("\nWpisałeś: %v\n\n", x)
+
+	if x == "z" {
+
+		Zapis()
+
+	} else if x == "r" {
+
+		Reset()
+	} else if x == "k" {
+
+		Zakoncz()
+	} else {
+		fmt.Println("Wpisaleś niepoprawny znak.")
+	}
+
+	return x
+}
+
+func Zapis() {
+	fmt.Print("Zapisane")
+}
+
+func Reset() {
+	fmt.Print("zresetowane")
+}
+
+func Zakoncz() {
+	fmt.Print("zakonczone")
+}
+
+// *** *** dodawanie WYKONANYCH OBLICZEŃ do historii *** *** - jeżeli user zechce, może zapisać wynik działania do rejestru obliczeń
+
+/* func archiwizuj(otrzymanyWynik int64) int {
+
+	otrzymanyWynik = Oblicz()
+
+}
+*/
 
 //*** *** FUNC MAIN *** ***
+
 func main() {
 
+	//	var archiwum map[int]int
+
 	Oblicz()
+
+	fmt.Println("Co robimy dalej?")
+
+	CoDalej()
 
 }
